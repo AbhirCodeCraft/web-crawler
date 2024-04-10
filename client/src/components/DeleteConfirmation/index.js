@@ -5,8 +5,12 @@ import axios from 'axios'
 const DeleteModal = ({ closeModal, data }) => {
     const handleClose = () => closeModal();
     const handleDelete = async() => { 
-        await axios.delete(`http://localhost:3005/clients/${data.id}`);
-        closeModal(true);
+        try {
+            await axios.delete(`http://localhost:3005/clients/${data.id}`);
+            closeModal(true);
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (

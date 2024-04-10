@@ -16,14 +16,19 @@ const DataComponent = () => {
     const emptyDb = responseEmpty && !Object.keys(searchParam).length;
     
     const setData = async() => {
-        setListData([]);
-        setResponseEmpty(false);
-        const { selectedOption, searchText } = searchParam;
-        let query = '';
-        if (selectedOption && searchText) query = `?${selectedOption}=${searchText}`;
-        const {data: {clientData}} = await axios.get(`http://localhost:3005/clients${query}`);
-        if (clientData.length) setListData(clientData);
-        else setResponseEmpty(true);        
+        try {
+            setListData([]);
+            setResponseEmpty(false);
+            const { selectedOption, searchText } = searchParam;
+            let query = '';
+            if (selectedOption && searchText) query = `?${selectedOption}=${searchText}`;
+            const {data: {clientData}} = await axios.get(`http://localhost:3005/clients${query}`);
+            if (clientData.length) setListData(clientData);
+            else setResponseEmpty(true);        
+        } catch (error) {
+            console.error(error);
+            setResponseEmpty(true);            
+        }
     }
     
     const handleCrawler = async() => {
@@ -35,7 +40,8 @@ const DataComponent = () => {
             setCrawlerInProgress(false);
             setData();
         } catch (error) {
-            
+            console.error(error);
+            setCrawlerInProgress(false);
         }
     }
 
