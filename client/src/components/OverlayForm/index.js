@@ -14,8 +14,9 @@ const OverlayForm = ({ closeModal, data }) => {
     
     const handleClose = () => closeModal();
     const handleChange = (e) => {
-    const {name, value} = e.target;
-        setFormValues(prevState => ({ ...prevState, [name]: value }))
+        const {name, value} = e.target;
+        setFormValues(prevState => ({ ...prevState, [name]: value }));
+        if(outcome) setOutcome(null);
     }
     const handleSave = async() => {
         try {
