@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
-import axios from 'axios'
 import TableComponent from '../Table';
 import OverlayForm from '../OverlayForm';
 import SearchBar from '../SearchBar';
 import Alert from '@mui/material/Alert';
 import './styles.css'
+import apiHelper from '../../configs/api';
 
 const DataComponent = () => {
     const [listData, setListData] = useState([]);
@@ -22,7 +22,7 @@ const DataComponent = () => {
             const { selectedOption, searchText } = searchParam;
             let query = '';
             if (selectedOption && searchText) query = `?${selectedOption}=${searchText}`;
-            const {data: {clientData}} = await axios.get(`http://localhost:3005/clients${query}`);
+            const {data: {clientData}} = await apiHelper.get(`/clients${query}`);
             if (clientData.length) setListData(clientData);
             else setResponseEmpty(true);        
         } catch (error) {
@@ -36,7 +36,7 @@ const DataComponent = () => {
             setListData([]);
             setResponseEmpty(false);
             setCrawlerInProgress(true);
-            await axios.get(`http://localhost:3005/crawler`);
+            await apiHelper.get(`/crawler`);
             setCrawlerInProgress(false);
             setData();
         } catch (error) {

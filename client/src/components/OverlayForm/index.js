@@ -2,9 +2,9 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios'
 import './styles.css'
 import Alert from '@mui/material/Alert';
+import apiHelper from '../../configs/api';
 
 const DEFAULT_FORM_VALUES = {company_name:'', company_activity:'', cin:'', registration_date:'', category:'', sub_category:'', company_class:'', roc:'', company_status:'', authorised_capital:'', paidup_capital:'', state:'', pin_code:'', country:'', address:'', email:''}
 
@@ -21,10 +21,10 @@ const OverlayForm = ({ closeModal, data }) => {
         try {
             if (data) {
                 // Update
-                await axios.post(`http://localhost:3005/clients/${data.id}`, formValues);
+                await apiHelper.post(`/clients/${data.id}`, formValues);
             } else {
                 // Add
-                await axios.post('http://localhost:3005/clients', formValues);
+                await apiHelper.post('/clients', formValues);
             }
             setOutcome('success');
             setTimeout(()=>{

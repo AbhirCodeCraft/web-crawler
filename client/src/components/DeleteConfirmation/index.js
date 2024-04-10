@@ -1,12 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios'
+import apiHelper from '../../configs/api';
 
 const DeleteModal = ({ closeModal, data }) => {
     const handleClose = () => closeModal();
     const handleDelete = async() => { 
         try {
-            await axios.delete(`http://localhost:3005/clients/${data.id}`);
+            await apiHelper.delete(`/clients/${data.id}`);
             closeModal(true);
         } catch (error) {
             console.error(error)
