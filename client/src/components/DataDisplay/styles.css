@@ -1,0 +1,40 @@
+.sectionWrapper {
+    padding: 20px 0 20px 0;
+    display: flex;
+}
+
+.spinnerWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+}
+
+.loaderText {
+    margin: 20px 0 0 0;
+}
+
+.buttonsWrapper {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.headerButton {
+    margin-left: 10px;
+}
+
+@media (max-width: 767px) {
+    .sectionWrapper {
+        flex-direction: column;
+    }
+    .buttonsWrapper {
+        justify-content: center;
+    }
+    .title {
+        text-align: center;
+    }
+}

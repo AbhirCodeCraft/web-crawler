@@ -1,0 +1,8 @@
+.fieldsWrapper {
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+.formPart {
+    width: 48%;
+}
